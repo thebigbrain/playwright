@@ -13,7 +13,9 @@ import { chromium, firefox, webkit } from "playwright";
   await page.addInitScript(() => {
     const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
     HTMLCanvasElement.prototype.toDataURL = function (type, quality) {
-      return origToDataURL.call(this, type, quality) + "?custom_fingerprint";
+      const r = origToDataURL.call(this, type, (quality || 1) * 0.93);
+      console.log(r);
+      return r;
     };
   });
 
