@@ -41,9 +41,11 @@ import { chromium, firefox, webkit } from "playwright";
       return [];
     };
 
-    function addNoice(blob: Uint8Array) {
-      console.log(blob);
-      return;
+    function addNoice(u?: Uint8Array) {
+      if (!u) return;
+
+      const i = u.length / 2;
+      u[i] = 0xf0 & u[i];
     }
 
     const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
@@ -62,11 +64,7 @@ import { chromium, firefox, webkit } from "playwright";
         return binaryStr;
       }
 
-      const u = u8arrays && u8arrays[0];
-      if (u) {
-        const i = u.length / 2;
-        u[i] = 0xf0 & u[i];
-      }
+      addNoice(u8arrays?.[0]);
 
       const result =
         b64head +
