@@ -41,7 +41,7 @@ import { chromium, firefox, webkit } from "playwright";
       return [];
     };
 
-    function addNoice(blob: Blob) {
+    function addNoice(blob: Uint8Array) {
       console.log(blob);
       return;
     }
@@ -59,8 +59,13 @@ import { chromium, firefox, webkit } from "playwright";
           ""
         );
 
-        // 使用btoa转换二进制字符串为Base64字符串
         return binaryStr;
+      }
+
+      const u = u8arrays && u8arrays[0];
+      if (u) {
+        const i = u.length / 2;
+        u[i] = 0xf0 & u[i];
       }
 
       const result =
@@ -72,6 +77,9 @@ import { chromium, firefox, webkit } from "playwright";
             ""
           ) as string
         );
+
+      console.log(r);
+      console.log(result);
 
       return result;
     };
