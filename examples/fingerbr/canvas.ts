@@ -64,7 +64,7 @@ import { chromium, firefox, webkit } from "playwright";
         return binaryStr;
       }
 
-      addNoice(u8arrays?.[0]);
+      addNoice(u8arrays?.[u8arrays.length - 1]);
 
       const result =
         b64head +
@@ -75,9 +75,6 @@ import { chromium, firefox, webkit } from "playwright";
             ""
           ) as string
         );
-
-      console.log(r);
-      console.log(result);
 
       return result;
     };
