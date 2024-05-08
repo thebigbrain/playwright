@@ -41,11 +41,11 @@ import { chromium, firefox, webkit } from "playwright";
       return [];
     };
 
-    function addNoice(u?: Uint8Array) {
+    function addNoice(u?: Uint8Array, noice = 1) {
       if (!u) return;
 
       const i = u.length / 2;
-      u[i] = 0xff & (u[i] - 1);
+      u[i] = 0xff & (u[i] - noice);
     }
 
     const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
