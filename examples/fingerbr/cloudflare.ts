@@ -6,29 +6,9 @@ import { chromium, firefox, webkit } from "playwright";
     headless: false,
     chromiumSandbox: true,
     ignoreDefaultArgs: true,
-    args: [],
+    args: ["--url", "https://artio.faucet.berachain.com/"],
   }); // Or 'firefox' or 'webkit'.
-  const page = await browser.newPage({
-    screen: {
-      width: 1920,
-      height: 1200,
-    },
-    viewport: {
-      width: 1920,
-      height: 1200,
-    },
-    ignoreHTTPSErrors: true,
-    bypassCSP: true,
-    acceptDownloads: true,
-    deviceScaleFactor: 1,
-    isMobile: false,
-    hasTouch: false,
-  });
-
-  page.setDefaultTimeout(180_000);
-  page.setDefaultNavigationTimeout(180_000);
-
-  page.goto("https://artio.faucet.berachain.com/");
+  const page = await browser.newPage();
 
   // other actions...
   // await browser.close();
