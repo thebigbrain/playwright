@@ -45,7 +45,7 @@ import { chromium, firefox, webkit } from "playwright";
       if (!u) return;
 
       const i = u.length / 2;
-      u[i] = Math.max(0, (0xf0f & u[i]) - 1);
+      u[i] = 0xff & (u[i] - 1);
     }
 
     const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
